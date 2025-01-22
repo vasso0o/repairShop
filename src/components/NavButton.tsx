@@ -10,7 +10,7 @@ type Props = {
 }
 
 export function NavButton({
-    icon: TheIcon,
+    icon: Icon,
     label,
     href,
 }: Props) {
@@ -25,10 +25,10 @@ export function NavButton({
         >
             {href ? (
                 <Link href={href}>
-                    <TheIcon />
+                    <Icon />
                 </Link>
             ) : (
-                <TheIcon />
+                <Icon />
             )}
         </Button>
     )

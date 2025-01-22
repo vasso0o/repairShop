@@ -1,5 +1,5 @@
 {
-  "id": "c2e55d14-d284-468a-aa43-bc171df41f69",
+  "id": "f89ce731-6d23-44b5-bfa7-d1dae63a96d8",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -42,23 +42,17 @@
           "name": "address1",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": true
-        },
-        "address2": {
-          "name": "address2",
-          "type": "varchar",
-          "primaryKey": false,
           "notNull": false
         },
         "city": {
           "name": "city",
-          "type": "varchar(20)",
+          "type": "varchar",
           "primaryKey": false,
           "notNull": true
         },
-        "province": {
-          "name": "province",
-          "type": "varchar(20)",
+        "state": {
+          "name": "state",
+          "type": "varchar(2)",
           "primaryKey": false,
           "notNull": true
         },
@@ -115,9 +109,7 @@
           ]
         }
       },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
+      "checkConstraints": {}
     },
     "public.tickets": {
       "name": "tickets",
@@ -194,16 +186,12 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
+      "checkConstraints": {}
     }
   },
   "enums": {},
   "schemas": {},
   "sequences": {},
-  "roles": {},
-  "policies": {},
   "views": {},
   "_meta": {
     "columns": {},

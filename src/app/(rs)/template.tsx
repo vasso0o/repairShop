@@ -1,7 +1,3 @@
-//template rerenders every time while layout loads at start
-//what that does is, add fade animation between pages
-//we create this class
-
 export default async function Template({
     children,
 }: {
@@ -9,7 +5,7 @@ export default async function Template({
 }) {
     return (
         <div className="animate-appear">
-                {children}
+            {children}
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import { Header } from "@/components/Header"
 
-export default async function RsLayout({
+export default async function RSLayout({
     children,
 }: {
     children: React.ReactNode
