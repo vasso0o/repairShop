@@ -1,9 +1,15 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
+import { InputWithLabel } from "@/components/inputs/InputWithLabel";
+import { SelectWithLabel } from "@/components/inputs/SelectWithLabel";
+import { TextAreaWithLabel } from "@/components/inputs/TextAreaWithLabel";
+
+import { StatesArray } from "@/constants/StatesArray";
 
 import {
   insertCustomerSchema,
@@ -30,6 +36,7 @@ export default function CustomerForm({ customer }: Props) {
     notes: customer?.notes ?? "",
   };
 
+  // if the customer exists, meaning it is an edit form, it passes the values to the fields, with calling on the inputs componenent the useformcontext and destructuring the 'field' on render
   const form = useForm<insertCustomerSchemaType>({
     mode: "onBlur",
     resolver: zodResolver(insertCustomerSchema),
@@ -39,6 +46,8 @@ export default function CustomerForm({ customer }: Props) {
   async function submitForm(data: insertCustomerSchemaType) {
     console.log(data);
   }
+
+  //we pass the schema here <InputWithLabel<insertCustomerSchemaType>> so we avoid typos and stuff.
 
   return (
     <div className="flex flex-col gap-1 sm:px-8">
@@ -50,12 +59,84 @@ export default function CustomerForm({ customer }: Props) {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(submitForm)}
-          className="flex flex-col sm:flex-row gap-4 sm:gap-8"
+          className="flex flex-col md:flex-row gap-4 md:gap-8"
         >
-          <p>{JSON.stringify(form.getValues())}</p>
-        </form>
+          <div className="flex flex-col gap-4 w-full max-w-xs">
+            <InputWithLabel<insertCustomerSchemaType>
+              fieldTitle="First Name"
+              nameInSchema="firstName"
+            />
 
-        <Button type="submit">Submit</Button>
+            <InputWithLabel<insertCustomerSchemaType>
+              fieldTitle="Last Name"
+              nameInSchema="lastName"
+            />
+
+            <InputWithLabel<insertCustomerSchemaType>
+              fieldTitle="Address 1"
+              nameInSchema="address1"
+            />
+
+            <InputWithLabel<insertCustomerSchemaType>
+              fieldTitle="Address 2"
+              nameInSchema="address2"
+            />
+
+            <InputWithLabel<insertCustomerSchemaType>
+              fieldTitle="City"
+              nameInSchema="city"
+            />
+
+            <SelectWithLabel<insertCustomerSchemaType>
+              fieldTitle="State"
+              nameInSchema="state"
+              data={StatesArray}
+            />
+          </div>
+
+          <div className="flex flex-col gap-4 w-full max-w-xs">
+            <InputWithLabel<insertCustomerSchemaType>
+              fieldTitle="Zip Code"
+              nameInSchema="zip"
+            />
+
+            <InputWithLabel<insertCustomerSchemaType>
+              fieldTitle="Email"
+              nameInSchema="email"
+            />
+
+            <InputWithLabel<insertCustomerSchemaType>
+              fieldTitle="Phone"
+              nameInSchema="phone"
+            />
+
+            <TextAreaWithLabel<insertCustomerSchemaType>
+              fieldTitle="Notes"
+              nameInSchema="notes"
+              className="h-40"
+            />
+
+            <div className="flex gap-2">
+              <Button
+                type="submit"
+                className="w-3/4"
+                variant="default"
+                title="Save"
+              >
+                Save
+              </Button>
+
+              <Button
+                type="button"
+                variant="destructive"
+                title="Reset"
+                onClick={() => form.reset(defaultValues)}
+              >
+                Reset
+              </Button>
+            </div>
+          </div>
+        </form>
       </Form>
     </div>
   );
