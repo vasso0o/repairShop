@@ -42,7 +42,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ### Prerequisites
 - Node.js 18+
 - PostgreSQL database (recommend Neon)
-- Kinde account for authentication
+- [Kinde account](https://kinde.com) - Create a free account to get authentication keys
+- [Sentry account](https://sentry.io) - Free tier available for error monitoring
 
 First, run the development server:
 
@@ -54,3 +55,31 @@ yarn dev
 pnpm dev
 # or
 bun dev
+```
+Open http://localhost:3000 with your browser to see the result.
+
+
+```bash
+npm install
+npm run dev
+```
+
+Create .env file
+Add these variables to a .env file in your root directory:
+
+```env
+DATABASE_URL=neon_connection_string
+KINDE_CLIENT_ID=your_kinde_client_id
+KINDE_CLIENT_SECRET=your_kinde_client_secret
+KINDE_ISSUER_URL=your_kinde_domain
+KINDE_SITE_URL=http://localhost:3000
+KINDE_POST_LOGIN_REDIRECT_URL=/dashboard
+AUTH_SECRET=your_random_secret_string
+```
+
+### Run database migrations
+
+```bash
+npx drizzle-kit generate:pg
+npx drizzle-kit push:pg
+```
